@@ -129,7 +129,7 @@ function canvasApp() {
 		var gameRect = theCanvas.getBoundingClientRect();
 		var resetRect = resetCanvas.getBoundingClientRect();
 
-		if (e.clientX > gameRect.right) {
+		if (e.clientX > gameRect.right || e.clientX < gameRect.left || e.clientY > gameRect.bottom || e.clientY < gameRect.top) {
 			if (e.clientX < resetRect.right && e.clientX > resetRect.left && e.clientY > resetRect.top && e.clientY < resetRect.bottom) {
 				resetButtonClicked();
 			}
