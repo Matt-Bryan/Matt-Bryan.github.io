@@ -46,6 +46,11 @@ function canvasApp() {
 				var newTileY = yCount * tileHeight + (tileHeight / 2);
 
 				var randomPhraseIndex = Math.floor((Math.random() * phraseArray.length));
+
+				while (usedPhraseIndices.includes(randomPhraseIndex)) {
+					randomPhraseIndex = Math.floor((Math.random() * phraseArray.length));
+				}
+
 				usedPhraseIndices.push(randomPhraseIndex);
 				var newTileText = xCount == 2 && yCount == 2 ? "FREE" : phraseArray[randomPhraseIndex];
 
