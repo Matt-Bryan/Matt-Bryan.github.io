@@ -88,7 +88,7 @@ function canvasApp() {
 			context.save();
 
 			context.fillStyle = "black";
- 			context.font = "14pt Arial";
+ 			context.font = "17pt Arial";
  			context.textAlign = "center";
 
 			//context.fillText(tileArray[tileIndex].text, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
@@ -215,11 +215,11 @@ var phraseArray = [
 "Someone is playing \ngames on their phone",
 "Someone is actually \ngetting work done",
 "Too many cliches",
-"Someone pretending to take notes",
+"Someone pretending to \ntake notes",
 "Someone thinking about \nfood instead",
 "Someone on social media",
 "Someone gives advice",
-"Someone blames someone else",
+"Someone blames \nsomeone else",
 "Someone gives credit \nto someone else",
 "Small talk"
 ]
