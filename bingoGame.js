@@ -229,7 +229,7 @@ var phraseArray = [
 "Last minute change to plans",
 "Someone is playing \ngames on their phone",
 "Someone is actually \ngetting work done",
-"Too many cliche phrases used",
+"Too many cliche \nphrases used",
 "Someone pretending to \ntake notes",
 "Someone thinking about \nfood instead",
 "Someone on social media",
