@@ -58,6 +58,18 @@ function canvasApp() {
 				tileArray.push(newTile);
 			}
 		}
+		console.log(checkForDups());
+	}
+
+	function checkForDups() {
+	    for(var i = 0; i < tileArray.length; i++) {
+	        for(var j = i; j < tileArray.length; j++) {
+	            if(i != j && tileArray[i].phraseText == tileArray[j].phraseText) {
+	            	return true;
+	            }
+	        }
+	    }
+	    return false;
 	}
 
 	function drawResetButton() {
@@ -96,8 +108,8 @@ function canvasApp() {
  			context.font = "17pt Arial";
  			context.textAlign = "center";
 
-			//context.fillText(tileArray[tileIndex].text, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
-			fillTextMultiLine(context, tileArray[tileIndex].text, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
+			//context.fillText(tileArray[tileIndex].phraseText, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
+			fillTextMultiLine(context, tileArray[tileIndex].phraseText, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
 			
 			context.restore();
 		}
@@ -142,10 +154,8 @@ function canvasApp() {
 		var gameRect = theCanvas.getBoundingClientRect();
 		var resetRect = resetCanvas.getBoundingClientRect();
 
-		if (e.clientX > gameRect.right || e.clientX < gameRect.left || e.clientY > gameRect.bottom || e.clientY < gameRect.top) {
-			if (e.clientX < resetRect.right && e.clientX > resetRect.left && e.clientY > resetRect.top && e.clientY < resetRect.bottom) {
-				resetButtonClicked();
-			}
+		if (e.clientX <= resetRect.right && e.clientX >= resetRect.left && e.clientY >= resetRect.top && e.clientY <= resetRect.bottom) {
+			resetButtonClicked();
 		}
 		else {
 			markTile(e.clientX - gameRect.left, e.clientY - gameRect.top);
@@ -188,7 +198,7 @@ class Tile {
  	constructor(xCenter, yCenter, text) {
  		this.xCenter = xCenter;
  		this.yCenter = yCenter;
- 		this.text = text;
+ 		this.phraseText = text;
  		this.marked = false;
  	}
 }
@@ -219,7 +229,7 @@ var phraseArray = [
 "Last minute change to plans",
 "Someone is playing \ngames on their phone",
 "Someone is actually \ngetting work done",
-"Too many cliches",
+"Too many cliche phrases used",
 "Someone pretending to \ntake notes",
 "Someone thinking about \nfood instead",
 "Someone on social media",
