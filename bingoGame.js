@@ -24,6 +24,7 @@ function canvasApp() {
 	}
 
 	var tileArray = [];
+	var usedPhraseIndices = [];
 
 	const tileHeight = theCanvas.height / 5;
  	const tileWidth = theCanvas.width / 5;
@@ -43,7 +44,12 @@ function canvasApp() {
 			for (var xCount = 0; xCount < 5; xCount++) {
 				var newTileX = xCount * tileWidth + (tileWidth / 2);
 				var newTileY = yCount * tileHeight + (tileHeight / 2);
-				var newTile = new Tile(newTileX, newTileY, "Insert Text Here");
+
+				var randomPhraseIndex = Math.floor((Math.random() * phraseArray.length));
+				usedPhraseIndices.push(randomPhraseIndex);
+				var newTileText = xCount == 2 && yCount == 2 ? "FREE" : phraseArray[randomPhraseIndex];
+
+				var newTile = new Tile(newTileX, newTileY, newTileText);
 				tileArray.push(newTile);
 			}
 		}
@@ -82,9 +88,11 @@ function canvasApp() {
 			context.save();
 
 			context.fillStyle = "black";
- 			context.font = "10pt Arial";
+ 			context.font = "14pt Arial";
+ 			context.textAlign = "center";
 
-			context.fillText(tileArray[tileIndex].text, tileArray[tileIndex].xCenter - tileWidth / 4.5, tileArray[tileIndex].yCenter);
+			//context.fillText(tileArray[tileIndex].text, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
+			fillTextMultiLine(context, tileArray[tileIndex].text, tileArray[tileIndex].xCenter, tileArray[tileIndex].yCenter + 5);
 			
 			context.restore();
 		}
@@ -140,9 +148,12 @@ function canvasApp() {
 	}
 
 	function resetButtonClicked() {
-		for (var index = 0; index < 25; index++) {
-			tileArray[index].marked = false;
-		}
+		// for (var index = 0; index < 25; index++) {
+		// 	tileArray[index].marked = false;
+		// }
+		tileArray = [];
+		usedPhraseIndices = [];
+		initBoard();
 	}
 
 	function markTile(xPos, yPos) {
@@ -157,6 +168,15 @@ function canvasApp() {
 
 		pickedTile.marked = !pickedTile.marked;
 	}
+
+	function fillTextMultiLine(ctx, text, x, y) {
+	  var lineHeight = ctx.measureText("M").width * 1.2;
+	  var lines = text.split("\n");
+	  for (var i = 0; i < lines.length; ++i) {
+	    ctx.fillText(lines[i], x, y);
+	    y += lineHeight;
+	  }
+	}
 }
 
 class Tile {
@@ -167,3 +187,39 @@ class Tile {
  		this.marked = false;
  	}
 }
+
+var phraseArray = [
+"Yawning",
+"Falling asleep",
+"Picking their nose",
+"Playing on their phone",
+"Looking out the window",
+"Checking the door",
+"Checking the time",
+"Saying too many um's \nin their presentation",
+"Presentation going \nlonger than planned",
+"Meeting running long",
+"Leaning far back \nin their chair",
+"Zoning out",
+"Person asking \nunnecessary questions",
+"Someone showing up late",
+"Technical difficulties",
+"Person unprepared",
+"Person not having stuff \ndone on time",
+"Client yelling",
+"Boss tells an unfunny joke",
+"Someone comments on \nthe weather",
+"Someone is already on \ntheir 3rd cup of coffee",
+"Awkward silence when \nsomeone asks a question",
+"Last minute change to plans",
+"Someone is playing \ngames on their phone",
+"Someone is actually \ngetting work done",
+"Too many cliches",
+"Someone pretending to take notes",
+"Someone thinking about \nfood instead",
+"Someone on social media",
+"Someone gives advice",
+"Someone blames someone else",
+"Someone gives credit \nto someone else",
+"Small talk"
+]
