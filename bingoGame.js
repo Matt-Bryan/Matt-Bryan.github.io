@@ -12,6 +12,7 @@ function canvasSupport () {
 
 function canvasApp() {
 	window.addEventListener("mousedown", mouseDownFunction, false);
+	window.addEventListener("touchstart", mouseDownFunction, false);
 
 	if (!canvasSupport()) {
 			 return;
